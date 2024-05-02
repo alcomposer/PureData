@@ -266,7 +266,7 @@ static void openit(const char *dirname, const char *filename, const char *args)
             binbuf_free(b1);
             binbuf_free(b2);
         }
-        glob_evalfile(0, gensym(nameptr), gensym(dirbuf));
+        glob_evalfile(0, gensym(nameptr), gensym(dirbuf), NULL);
     }
     else
         pd_error(0, "%s: can't open", filename);

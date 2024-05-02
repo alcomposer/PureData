@@ -516,5 +516,5 @@ void open_via_helppath(const char *name, const char *dir)
     return;
 gotone:
     close (fd);
-    glob_evalfile(0, gensym((char*)basename), gensym(dirbuf));
+    glob_evalfile(0, gensym((char*)basename), gensym(dirbuf), NULL);
 }

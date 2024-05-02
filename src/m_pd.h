@@ -193,6 +193,25 @@ typedef struct _atom
     union word a_w;
 } t_atom;
 
+typedef enum _permission {
+    Permission_None   = 0,
+    Permission_Read    = 1 << 0,
+    Permission_Write   = 1 << 1
+} Permission;
+
+typedef struct _permissions
+{
+    unsigned int p_array;
+    unsigned int p_file;
+    unsigned int p_network;
+    unsigned int p_qlist;
+    unsigned int p_soundfiler;
+    unsigned int p_table;
+    unsigned int p_text;
+    unsigned int p_textfile;
+    unsigned int p_writesf;
+} t_permissions;
+
 EXTERN_STRUCT _class;
 #define t_class struct _class
 

@@ -2197,7 +2197,7 @@ void pd_doloadbang(void);
 
     /* evaluate a file, which is expected to create a patch, and perform
     post-evaluation cleanup and loadbang */
-t_pd *glob_evalfile(t_pd *ignore, t_symbol *name, t_symbol *dir)
+t_pd *glob_evalfile(t_pd *ignore, t_symbol *name, t_symbol *dir, t_permissions* permissions)
 {
     t_pd *x = 0, *boundx;
     int dspstate;
@@ -2216,6 +2216,11 @@ t_pd *glob_evalfile(t_pd *ignore, t_symbol *name, t_symbol *dir)
         x = s__X.s_thing;
         vmess(x, gensym("pop"), "i", 1);
     }
+    // get the newest canvas which has just been created
+    t_glist* cnv = glist_getcanvas((t_glist*)pd_this->pd_newest);
+    // set plugdata permissions here, as this is directly after the canvas is created, but before run
+    cnv->gl_permissions = permissions;
+
     if (!sys_noloadbang)
         pd_doloadbang();
     canvas_resume_dsp(dspstate);
@@ -2238,6 +2243,6 @@ void glob_open(t_pd *ignore, t_symbol *name, t_symbol *dir, t_floatarg f)
         canvas_vis(gl, 1);
         return;
     }
-    if (!glob_evalfile(ignore, name, dir))
+    if (!glob_evalfile(ignore, name, dir, NULL))
         pdgui_vmess("::pdwindow::busyrelease", 0);
 }

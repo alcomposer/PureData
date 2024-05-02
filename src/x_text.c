@@ -2076,6 +2076,10 @@ static void qlist_read(t_qlist *x, t_symbol *filename, t_symbol *format)
 
 static void qlist_write(t_qlist *x, t_symbol *filename, t_symbol *format)
 {
+    if ((glist_getcanvas(x)->gl_permissions->p_qlist & Permission_Write) == 0) {
+        pd_error(x, "qlist does not have write permission, %d", glist_getcanvas(x)->gl_permissions->p_qlist);
+        return;
+    }
     int cr = 0;
     char buf[MAXPDSTRING];
     canvas_makefilename(x->x_canvas, filename->s_name,

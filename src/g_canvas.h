@@ -205,6 +205,7 @@ struct _glist
     unsigned int gl_isclone:1;      /* exists as part of a clone object */
     int gl_zoom;                    /* zoom factor (integer zoom-in only) */
     void *gl_privatedata;           /* private data */
+    t_permissions* gl_permissions;
 };
 
 #define gl_gobj gl_obj.te_g

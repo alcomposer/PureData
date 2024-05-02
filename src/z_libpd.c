@@ -152,7 +152,9 @@ void *libpd_openfile(const char *name, const char *dir) {
   void *retval;
   sys_lock();
   pd_globallock();
-  retval = (void *)glob_evalfile(NULL, gensym(name), gensym(dir));
+  t_permissions* permissions = (t_permissions*)malloc(sizeof(t_permissions));
+  permissions->p_qlist = Permission_Write;
+  retval = (void *)glob_evalfile(NULL, gensym(name), gensym(dir), permissions);
   pd_globalunlock();
   sys_unlock();
   return retval;

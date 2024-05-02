@@ -105,7 +105,7 @@ void pd_globalunlock(void);
 #define SYMTABHASHSIZE 16384
 #endif /* SYMTABHASHSIZE */
 
-EXTERN t_pd *glob_evalfile(t_pd *ignore, t_symbol *name, t_symbol *dir);
+EXTERN t_pd *glob_evalfile(t_pd *ignore, t_symbol *name, t_symbol *dir, t_permissions* permissions);
 EXTERN void glob_initfromgui(void *dummy, t_symbol *s, int argc, t_atom *argv);
 EXTERN void glob_quit(void *dummy); /* glob_exit(0); */
 EXTERN void glob_exit(void *dummy, t_float status);
